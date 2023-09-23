@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */; };
+		39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F712ABF2A1000FB8C04 /* Contato.swift */; };
+		39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */; };
 		397E3CDE2ABCCE60008FB248 /* AgendaContatosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E3CDD2ABCCE60008FB248 /* AgendaContatosApp.swift */; };
 		397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E3CDF2ABCCE60008FB248 /* ContentView.swift */; };
 		397E3CE22ABCCE61008FB248 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E3CE12ABCCE61008FB248 /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLineView.swift; sourceTree = "<group>"; };
+		39222F712ABF2A1000FB8C04 /* Contato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contato.swift; sourceTree = "<group>"; };
+		39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriadorObjetos.swift; sourceTree = "<group>"; };
 		397E3CDA2ABCCE60008FB248 /* AgendaContatos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgendaContatos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397E3CDD2ABCCE60008FB248 /* AgendaContatosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaContatosApp.swift; sourceTree = "<group>"; };
 		397E3CDF2ABCCE60008FB248 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +69,9 @@
 			isa = PBXGroup;
 			children = (
 				397E3CE42ABCCE61008FB248 /* Preview Assets.xcassets */,
+				39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */,
+				39222F712ABF2A1000FB8C04 /* Contato.swift */,
+				39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */,
+				39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */,
 				397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */,
 				397E3CDE2ABCCE60008FB248 /* AgendaContatosApp.swift in Sources */,
+				39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var obj = CriadorObjetos()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView{
+            
+            VStack{
+                
+                List{
+                    ForEach(obj.agenda){ ct in
+                        
+                        NavigationLink {
+                        } label: {
+                        ListLineView(contato: ct)
+                        }
+                    }
+                }//list
+                
+            }
+            
+            .navigationTitle("Contatos")
+            .navigationBarTitleDisplayMode(.automatic)
+        }
+        
     }
 }
