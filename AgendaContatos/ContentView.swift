@@ -38,17 +38,26 @@ struct ContentView: View {
                 }
             }
             
-            .navigationBarTitle("Contatos")
-            .navigationBarTitleDisplayMode(.automatic)
-            .navigationBarItems(trailing:
-                Button(action: {
-                    
-                }) {
-                Text("Add")
-                Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
+            .navigationBarTitle("", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Text("Contatos")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Spacer()
+                        Button(action: {}) {
+                            Text("Add")
+                            Image(systemName: "plus.circle.fill")
+                                .imageScale(.large)
+                        }
+                    }
+                    .padding(.top, 30)
+                    .padding(.bottom, 25)
+
                 }
-            )
+            }
+
         }
     }
 }
