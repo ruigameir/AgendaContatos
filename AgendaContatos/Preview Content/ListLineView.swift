@@ -15,12 +15,12 @@ struct ListLineView: View{
     var body: some View{
         
         HStack{
+
             Image(contato.foto)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 60, height: 60)
-                .clipShape(Circle())
-                .padding(.horizontal, 15)
+                .frame(width: 50, height: 50)
+                .clipShape(Ellipse())
                         
             Text(contato.primeiroNome)
                 .font(.title)
@@ -28,6 +28,7 @@ struct ListLineView: View{
             Text(contato.segundoNome)
                 .font(.title)
                 .fontWeight(.bold)
+
             }
         }
     }
