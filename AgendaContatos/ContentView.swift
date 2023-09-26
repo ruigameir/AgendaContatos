@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var obj = CriadorObjetos()
+    //@StateObject var obj = CriadorObjetos()
+    @State var load: loadData
+    load.getData()
+    @State var users: [user] = load.users
     
     var body: some View {
         NavigationView {
