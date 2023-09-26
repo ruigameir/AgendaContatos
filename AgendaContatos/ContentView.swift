@@ -25,39 +25,49 @@ struct ContentView: View {
                                     }
                                     return false
                                 })
-                            
+                                
                             ) { contato in
                                 NavigationLink(destination: ContatoIndividual(contato: contato)) {
                                     ListLineView(contato: contato)
                                 }
                             }
-
-
+                            
+                            
                         }
                     }
                 }
+                
+                .navigationBarTitle("", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Text("Contatos")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                        }
+                        .padding(.top, 30)
+                        .padding(.bottom, 25)
+                        
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                                                        
+                            NavigationLink(destination: CriadorContato()) {
+                                Text("Add")
+                                Image(systemName: "plus.circle.fill")
+                                    .imageScale(.large)
+                            }
+                                                        
+                        }
+                        .padding(.top, 30)
+                        .padding(.bottom, 25)
+                        
+                    }
+                }
+                
             }
             
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack {
-                        Text("Contatos")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Button(action: {}) {
-                            Text("Add")
-                            Image(systemName: "plus.circle.fill")
-                                .imageScale(.large)
-                        }
-                    }
-                    .padding(.top, 30)
-                    .padding(.bottom, 25)
-
-                }
-            }
-
         }
     }
 }
+

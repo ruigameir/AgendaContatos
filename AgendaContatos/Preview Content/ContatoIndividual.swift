@@ -37,6 +37,8 @@ struct ContatoIndividual: View {
             } label: {
                 Text("Mais info")
             }
+            
+            
 
         }
         .navigationTitle("\(contato.primeiroNome) \(contato.segundoNome)")

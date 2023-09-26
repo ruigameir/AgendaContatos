@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391C37E82AC1D6CF004C2960 /* CriadorContato.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C37E72AC1D6CF004C2960 /* CriadorContato.swift */; };
 		39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */; };
 		39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F712ABF2A1000FB8C04 /* Contato.swift */; };
 		39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */; };
@@ -15,9 +16,11 @@
 		397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E3CDF2ABCCE60008FB248 /* ContentView.swift */; };
 		397E3CE22ABCCE61008FB248 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E3CE12ABCCE61008FB248 /* Assets.xcassets */; };
 		397E3CE52ABCCE61008FB248 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E3CE42ABCCE61008FB248 /* Preview Assets.xcassets */; };
+		39F2FC3C2AC32CCC002B132A /* usr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2FC3B2AC32CCC002B132A /* usr.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		391C37E72AC1D6CF004C2960 /* CriadorContato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriadorContato.swift; sourceTree = "<group>"; };
 		39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLineView.swift; sourceTree = "<group>"; };
 		39222F712ABF2A1000FB8C04 /* Contato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contato.swift; sourceTree = "<group>"; };
 		39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriadorObjetos.swift; sourceTree = "<group>"; };
@@ -27,6 +30,7 @@
 		397E3CDF2ABCCE60008FB248 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		397E3CE12ABCCE61008FB248 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		397E3CE42ABCCE61008FB248 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		39F2FC3B2AC32CCC002B132A /* usr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usr.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				39222F712ABF2A1000FB8C04 /* Contato.swift */,
 				39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */,
 				39222F772ABF3E2300FB8C04 /* ContatoIndividual.swift */,
+				391C37E72AC1D6CF004C2960 /* CriadorContato.swift */,
+				39F2FC3B2AC32CCC002B132A /* usr.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -150,10 +156,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */,
+				391C37E82AC1D6CF004C2960 /* CriadorContato.swift in Sources */,
 				39222F782ABF3E2300FB8C04 /* ContatoIndividual.swift in Sources */,
 				39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */,
 				397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */,
 				397E3CDE2ABCCE60008FB248 /* AgendaContatosApp.swift in Sources */,
+				39F2FC3C2AC32CCC002B132A /* usr.swift in Sources */,
 				39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
