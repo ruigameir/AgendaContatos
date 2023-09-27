@@ -10,27 +10,51 @@ import SwiftUI
 
 
 struct ContatoIndividual: View {
-   
-    var contato: Contato
+    
+    var user: user
     
     
     var body: some View {
         
         VStack{
-
             
-            Image(contato.foto)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 200, height: 200)
-                .clipShape(Ellipse())
-                .padding(.top, 20)
-
-            Text(contato.email)
+            AsyncImage(url: URL(string: user.picture)) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .clipShape(Ellipse())
+                        .padding(.top, 20)
+                default:
+                    Image("noImg")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 200)
+                        .clipShape(Ellipse())
+                        .padding(.top, 20)
+                    ProgressView()
+                }
+            }
+                     
+ 
+            
+            Text(user.title)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .fontWeight(.bold)
                 .padding(.top,20)
-         
+            
+            Text(user.firstName)
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
+                .padding(.top,20)
+            
+            Text(user.lastName)
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
+                .padding(.top,20)
+            
             Spacer()
             NavigationLink {
                 Text("Detalhes")
@@ -39,9 +63,9 @@ struct ContatoIndividual: View {
             }
             
             
-
+            
         }
-        .navigationTitle("\(contato.primeiroNome) \(contato.segundoNome)")
+        .navigationTitle("\(user.firstName) \(user.lastName)")
         
         
         
