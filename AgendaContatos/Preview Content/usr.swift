@@ -7,15 +7,17 @@
 
 import Foundation
 
-struct user:Codable,Identifiable{
+struct user:Codable, Identifiable{
     
     var id: String
     var firstName: String
     var lastName: String
     var title: String
     var picture:String
-}
+    var email:String?
 
+}
+    
 struct usersData: Codable{
     
     var data:[user]
@@ -28,7 +30,7 @@ class loadData:ObservableObject{
     @Published var users:[user] = []
     
     init() {
-        self.url = URL(string: "https://dummyapi.io/data/v1/user")!
+        self.url = URL(string: "https://dummyapi.io/data/v1/user?page=")!
         self.apiKey = "650c6c418b4bf3bfbaef1ca9"
         self.getData()
     }
@@ -62,6 +64,8 @@ class loadData:ObservableObject{
                 print("Erro ao decodificar JSON: Os dados não puderam ser decodificados.")
             }
 
+            
         }.resume()
     }
+    
 }

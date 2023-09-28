@@ -11,7 +11,7 @@ struct ContentView: View {
     
     //@StateObject var obj = CriadorObjetos()
     @ObservedObject var load = loadData()
-    
+   
     
     var body: some View {
         NavigationView {
@@ -29,7 +29,26 @@ struct ContentView: View {
                         Section(String(char)) {
                             ForEach(filteredUsers) { user in
                                 NavigationLink(destination: ContatoIndividual(user: user)){
+                                    AsyncImage(url: URL(string: user.picture)) { phase in
+                                        switch phase {
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Ellipse())
+                                        default:
+                                            Image("noImg")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Ellipse())
+                                            ProgressView()
+                                        }
+                                    }
                                     Text(user.firstName + " " + user.lastName)
+                                        .fontWeight(.bold)
+                                        .padding(.leading, 10)
                                     
                                 }
                             }

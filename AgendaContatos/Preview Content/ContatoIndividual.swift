@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContatoIndividual: View {
     
-    var user: user
+    var user: user    
     
     
     var body: some View {
@@ -23,38 +23,30 @@ struct ContatoIndividual: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                         .frame(width: 200, height: 200)
                         .clipShape(Ellipse())
                         .padding(.top, 20)
                 default:
                     Image("noImg")
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipShape(Ellipse())
                         .padding(.top, 20)
                     ProgressView()
                 }
-            }
-                     
+            }                   
  
             
-            Text(user.title)
+            Text(user.title + " " + user.firstName + " " + user.lastName)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .fontWeight(.bold)
                 .padding(.top,20)
             
-            Text(user.firstName)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .fontWeight(.bold)
-                .padding(.top,20)
-            
-            Text(user.lastName)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .fontWeight(.bold)
-                .padding(.top,20)
-            
+            Text(user.id)
+
+
             Spacer()
             NavigationLink {
                 Text("Detalhes")
