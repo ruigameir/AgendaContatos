@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    //@StateObject var obj = CriadorObjetos()
-    @ObservedObject var load = loadData()
+    @ObservedObject var load = LoadData()
    
     
     var body: some View {

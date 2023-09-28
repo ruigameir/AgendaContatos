@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContatoIndividual: View {
     
-    var user: user    
+    var user: User    
     
     
     var body: some View {
@@ -39,20 +39,16 @@ struct ContatoIndividual: View {
             }                   
  
             
-            Text(user.title + " " + user.firstName + " " + user.lastName)
+            Text(user.firstName + " " + user.lastName)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .fontWeight(.bold)
                 .padding(.top,20)
             
-            Text(user.id)
-
 
             Spacer()
-            NavigationLink {
+            NavigationLink (destination: Detalhes(user: user)){        
                 Text("Detalhes")
-            } label: {
-                Text("Mais info")
-            }
+            } 
             
             
             

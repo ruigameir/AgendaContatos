@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct user:Codable, Identifiable{
+struct User:Codable, Identifiable{
     
     var id: String
     var firstName: String
@@ -15,28 +15,36 @@ struct user:Codable, Identifiable{
     var title: String
     var picture:String
     var email:String?
-
-}
     
-struct usersData: Codable{
-    
-    var data:[user]
 }
 
-class loadData:ObservableObject{
+struct UsersData: Codable{
     
-    let url:URL
+    var data:[User]
+}
+
+class LoadData:ObservableObject{
+    
     let apiKey:String
-    @Published var users:[user] = []
+    @Published var users:[User] = []
     
-       
+    var currentPage: Int = 0 // Começa da página 0
+    let baseURL: String = "https://dummyapi.io/data/v1/user?page="
+    
+    
     init() {
-        self.url = URL(string: "https://dummyapi.io/data/v1/user?page=2&limit=50")!
-        self.apiKey = "650f0e9b2f67a143676b7053"
+        self.apiKey = "650c6c418b4bf3bfbaef1ca9"
         self.getData()
     }
     
+    
     func getData() {
+        let urlString = "\(baseURL)\(currentPage)&limit=50"
+        guard let url = URL(string: urlString) else {
+            print("URL inválida")
+            return
+        }
+        
         
         var urlReq = URLRequest(url: url)
         
@@ -55,14 +63,19 @@ class loadData:ObservableObject{
                 return
             }
             
-            if let usersData = try? JSONDecoder().decode(usersData.self, from: data) {
+            if let usersData = try? JSONDecoder().decode(UsersData.self, from: data) {
                 DispatchQueue.main.async {
-                    self.users = usersData.data
+                    self.users += usersData.data // Adiciona os novos usuários à lista existente
+                    self.currentPage += 1 // Incrementa o número da página
+                    self.getData() // Chama novamente a função para buscar a próxima página
                 }
             } else {
-                print("Erro ao decodificar JSON: Os dados não puderam ser decodificados.")
-            }
+                if self.currentPage == 0 {
+                    print("Erro ao decodificar JSON: Os dados não puderam ser decodificados.")
 
+                }
+            }
+            
             
         }.resume()
     }

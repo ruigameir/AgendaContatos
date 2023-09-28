@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ListLineView: View{
     
-    var user:user
+    var user:User
     
     var body: some View{
         

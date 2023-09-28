@@ -16,7 +16,7 @@ struct CriadorContato: View{
     @State private var email: String = ""
     @State private var foto: String = ""
     
-    @StateObject var criar = criarUser()
+    @StateObject var criar = CriarUser()
     
     var body: some View{
         
@@ -29,7 +29,7 @@ struct CriadorContato: View{
                     
                 }
                 Section("Fotografia"){
-                    TextField("e-mail", text: $email)
+                    TextField("E-mail", text: $email)
                     TextField("URL Foto", text: $foto)
 
                     Button (action: {
@@ -57,7 +57,7 @@ struct CriadorContato: View{
     }
 }
 
-class criarUser: ObservableObject {
+class CriarUser: ObservableObject {
     
     let url: URL
     let apiKey: String
@@ -72,7 +72,7 @@ class criarUser: ObservableObject {
         
     init() {
         self.url = URL(string: "https://dummyapi.io/data/v1/user/create")!
-        self.apiKey = "650f0e9b2f67a143676b7053"
+        self.apiKey = "650c6c418b4bf3bfbaef1ca9"
     }
     
     func create_user() {
