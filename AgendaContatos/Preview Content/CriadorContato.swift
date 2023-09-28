@@ -10,11 +10,20 @@ import SwiftUI
 
 struct CriadorContato: View{
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var title: String = ""
-    @State private var primeiroNome: String = ""
-    @State private var ultimoNome: String = ""
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var picture: String = ""
     @State private var email: String = ""
-    @State private var foto: String = ""
+    @State private var dateOfBirth: String = ""
+    @State private var phone: String = ""
+    @State private var street: String = ""
+    @State private var city: String = ""
+    @State private var state: String = ""
+    @State private var country: String = ""
+    @State private var timezone: String = ""
     
     @StateObject var criar = CriarUser()
     
@@ -22,54 +31,86 @@ struct CriadorContato: View{
         
         VStack{
             Form{
-                Section("Nome"){
-                    TextField("Titulo", text: $title)
-                    TextField("Primeiro nome", text: $primeiroNome)
-                    TextField("Último nome", text: $ultimoNome)
-                    
+                Section(header: Text("Informações Pessoais")) {
+                    TextField("Título", text: $title)
+                    TextField("Primeiro Nome", text: $firstName)
+                    TextField("Sobrenome", text: $lastName)
+                    TextField("URL da Foto", text: $picture)
+                    TextField("Email", text: $email)
+                    TextField("Data de Nascimento", text: $dateOfBirth)
+                    TextField("Telefone", text: $phone)
                 }
-                Section("Fotografia"){
-                    TextField("E-mail", text: $email)
-                    TextField("URL Foto", text: $foto)
-
+                
+                Section(header: Text("Localização")) {
+                    TextField("Rua", text: $street)
+                    TextField("Cidade", text: $city)
+                    TextField("Estado", text: $state)
+                    TextField("País", text: $country)
+                    TextField("Fuso Horário", text: $timezone)
+                    
                     Button (action: {
+                        
                         criar.data["title"] = title
-                        criar.data["firstName"] = primeiroNome
-                        criar.data["lastName"] = ultimoNome
+                        criar.data["firstName"] = firstName
+                        criar.data["lastName"] = lastName
+                        criar.data["picture"] = picture
                         criar.data["email"] = email
-                        criar.data["picture"] = foto
+                        criar.data["dateOfBirth"] = dateOfBirth
+                        criar.data["phone"] = phone
+                        criar.data["location"] = [
+                            "street": street,
+                            "city": city,
+                            "state": state,
+                            "country": country,
+                            "timezone": timezone
+                        ]
+                        
                         criar.create_user()
+                        
+                        // Após criar o usuário com sucesso, volte para a ContentView
+                        self.presentationMode.wrappedValue.dismiss()
                         
                     }, label: {
                         Text("Criar")
                     })
                     .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)
-
                 }
-                
-                
+ 
             }
-            
-            .navigationTitle("Crie um contato")
-            
+  
         }
+        
+        .navigationTitle("Crie um contato")
+        
     }
 }
+
 
 class CriarUser: ObservableObject {
     
     let url: URL
     let apiKey: String
     
-    var data = [
-            "firstName": "",
-            "lastName": "",
-            "email": "" ,
-            "title": "",
-            "picture": ""
-        ]
-        
+    @Published var data: [String: Any] = [
+        "title": "",
+        "firstName": "",
+        "lastName": "",
+        "picture": "",
+        "email": "",
+        "dateOfBirth": "",
+        "phone": "",
+        "location": [
+            "street": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timezone": ""
+        ],
+        "registerDate": "",
+        "updatedDate": ""
+    ]
+    
     init() {
         self.url = URL(string: "https://dummyapi.io/data/v1/user/create")!
         self.apiKey = "650c6c418b4bf3bfbaef1ca9"
