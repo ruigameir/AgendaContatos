@@ -29,21 +29,20 @@ class loadData:ObservableObject{
     let apiKey:String
     @Published var users:[user] = []
     
+       
     init() {
-        self.url = URL(string: "https://dummyapi.io/data/v1/user?page=")!
-        self.apiKey = "650c6c418b4bf3bfbaef1ca9"
+        self.url = URL(string: "https://dummyapi.io/data/v1/user?page=2&limit=50")!
+        self.apiKey = "650f0e9b2f67a143676b7053"
         self.getData()
     }
     
     func getData() {
-        
         
         var urlReq = URLRequest(url: url)
         
         urlReq.httpMethod = "GET"
         
         urlReq.setValue(apiKey, forHTTPHeaderField: "app-id")
-        
         
         URLSession.shared.dataTask(with: urlReq) { data, _, error in
             if let error = error {
