@@ -10,22 +10,24 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var load = LoadData()
-   
+    
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(0..<26, id: \.self) { charIndex in
-                        let char = Character(UnicodeScalar(charIndex + 65)!)
-                        let filteredUsers = load.users.filter { user in
-                            guard let firstChar = user.firstName.first else {
-                                return false
+                    ForEach(alphabet, id: \.self) { char in
+                        let filteredUsers = load.users
+                            .filter { user in
+                                guard let firstChar = user.firstName.first else {
+                                    return false
+                                }
+                                return String(firstChar).uppercased() == char
                             }
-                            return String(firstChar).uppercased() == String(char)
-                        }
+                            .sorted { $0.firstName < $1.firstName } // Ordenar alfabeticamente
                         
-                        Section(String(char)) {
+                        Section(char) {
                             ForEach(filteredUsers) { user in
                                 NavigationLink(destination: ContatoIndividual(user: user)){
                                     AsyncImage(url: URL(string: user.picture)) { phase in
@@ -48,14 +50,11 @@ struct ContentView: View {
                                     Text(user.firstName + " " + user.lastName)
                                         .fontWeight(.bold)
                                         .padding(.leading, 10)
-                                    
                                 }
                             }
                         }
                     }
                 }
-                
-                
                 .navigationBarTitle("", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -66,28 +65,20 @@ struct ContentView: View {
                         }
                         .padding(.top, 30)
                         .padding(.bottom, 25)
-                        
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
-                            
                             NavigationLink(destination: CriadorContato()) {
                                 Text("Add")
                                 Image(systemName: "plus.circle.fill")
                                     .imageScale(.large)
                             }
-                            
                         }
                         .padding(.top, 30)
                         .padding(.bottom, 25)
-                        
                     }
                 }
-                
             }
-            
         }
     }
 }
-
-

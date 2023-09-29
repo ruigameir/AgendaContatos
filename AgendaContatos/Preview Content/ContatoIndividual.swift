@@ -11,8 +11,12 @@ import SwiftUI
 
 struct ContatoIndividual: View {
     
-    var user: User    
+    var user: User
     
+
+    var apagar: ApagarContato {
+          return ApagarContato(id: user.id) // Passar o ID para ApagarContato
+      }
     
     var body: some View {
         
@@ -48,7 +52,11 @@ struct ContatoIndividual: View {
             Spacer()
             NavigationLink (destination: Detalhes(user: user)){        
                 Text("Detalhes")
-            } 
+            }
+            Button(action: {
+                print("ID do usuário a ser excluído: \(user.id)")
+                apagar.deleteUser()
+            }, label: {Text("Apagar")})
             
             
             

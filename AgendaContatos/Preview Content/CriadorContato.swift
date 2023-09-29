@@ -16,6 +16,7 @@ struct CriadorContato: View{
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var picture: String = ""
+    @State private var gender: String = ""
     @State private var email: String = ""
     @State private var dateOfBirth: String = ""
     @State private var phone: String = ""
@@ -35,6 +36,7 @@ struct CriadorContato: View{
                     TextField("Título", text: $title)
                     TextField("Primeiro Nome", text: $firstName)
                     TextField("Sobrenome", text: $lastName)
+                    TextField("Genero", text: $gender)
                     TextField("URL da Foto", text: $picture)
                     TextField("Email", text: $email)
                     TextField("Data de Nascimento", text: $dateOfBirth)
@@ -54,6 +56,7 @@ struct CriadorContato: View{
                         criar.data["firstName"] = firstName
                         criar.data["lastName"] = lastName
                         criar.data["picture"] = picture
+                        criar.data["gender"] = gender
                         criar.data["email"] = email
                         criar.data["dateOfBirth"] = dateOfBirth
                         criar.data["phone"] = phone
@@ -97,6 +100,7 @@ class CriarUser: ObservableObject {
         "firstName": "",
         "lastName": "",
         "picture": "",
+        "gender":"",
         "email": "",
         "dateOfBirth": "",
         "phone": "",
