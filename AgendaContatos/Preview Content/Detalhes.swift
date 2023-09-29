@@ -78,6 +78,7 @@ class GetAllInfo: ObservableObject {
     
     init(id:String) {
         self.id = id
+        self.getUserFull()
         
     }
     

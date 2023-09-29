@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		391C37E82AC1D6CF004C2960 /* CriadorContato.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C37E72AC1D6CF004C2960 /* CriadorContato.swift */; };
-		39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */; };
-		39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F712ABF2A1000FB8C04 /* Contato.swift */; };
-		39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */; };
 		39222F782ABF3E2300FB8C04 /* ContatoIndividual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222F772ABF3E2300FB8C04 /* ContatoIndividual.swift */; };
 		397E3CDE2ABCCE60008FB248 /* AgendaContatosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E3CDD2ABCCE60008FB248 /* AgendaContatosApp.swift */; };
 		397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E3CDF2ABCCE60008FB248 /* ContentView.swift */; };
@@ -24,9 +21,6 @@
 
 /* Begin PBXFileReference section */
 		391C37E72AC1D6CF004C2960 /* CriadorContato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriadorContato.swift; sourceTree = "<group>"; };
-		39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLineView.swift; sourceTree = "<group>"; };
-		39222F712ABF2A1000FB8C04 /* Contato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contato.swift; sourceTree = "<group>"; };
-		39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriadorObjetos.swift; sourceTree = "<group>"; };
 		39222F772ABF3E2300FB8C04 /* ContatoIndividual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContatoIndividual.swift; sourceTree = "<group>"; };
 		397E3CDA2ABCCE60008FB248 /* AgendaContatos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgendaContatos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397E3CDD2ABCCE60008FB248 /* AgendaContatosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaContatosApp.swift; sourceTree = "<group>"; };
@@ -81,9 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				397E3CE42ABCCE61008FB248 /* Preview Assets.xcassets */,
-				39222F6F2ABF29BA00FB8C04 /* ListLineView.swift */,
-				39222F712ABF2A1000FB8C04 /* Contato.swift */,
-				39222F752ABF2DA700FB8C04 /* CriadorObjetos.swift */,
 				39222F772ABF3E2300FB8C04 /* ContatoIndividual.swift */,
 				391C37E72AC1D6CF004C2960 /* CriadorContato.swift */,
 				39F2FC3B2AC32CCC002B132A /* usr.swift */,
@@ -164,16 +155,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39222F722ABF2A1000FB8C04 /* Contato.swift in Sources */,
 				391C37E82AC1D6CF004C2960 /* CriadorContato.swift in Sources */,
 				39222F782ABF3E2300FB8C04 /* ContatoIndividual.swift in Sources */,
-				39222F702ABF29BA00FB8C04 /* ListLineView.swift in Sources */,
 				397E3CE02ABCCE60008FB248 /* ContentView.swift in Sources */,
 				397E3CDE2ABCCE60008FB248 /* AgendaContatosApp.swift in Sources */,
 				39F2FC3C2AC32CCC002B132A /* usr.swift in Sources */,
 				39E479D42AC5EAA400D99C01 /* Detalhes.swift in Sources */,
 				39E479D62AC6238200D99C01 /* ApagarContato.swift in Sources */,
-				39222F762ABF2DA700FB8C04 /* CriadorObjetos.swift in Sources */,
 				39802DCC2AC70ECB00D7936C /* EditarContato.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
