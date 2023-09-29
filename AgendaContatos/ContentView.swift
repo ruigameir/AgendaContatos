@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @ObservedObject var load = LoadData()
     
+    @State private var isRefreshing = true
+        
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     
     var body: some View {
@@ -55,6 +57,21 @@ struct ContentView: View {
                         }
                     }
                 }
+                .refreshable {
+                    isRefreshing = false
+                    load.updateData()
+                }
+                .onAppear {
+                    Task {
+                        if(!isRefreshing){
+                            load.updateData()
+                            isRefreshing = false
+
+                        }
+                        
+                    }
+                }
+                
                 .navigationBarTitle("", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {

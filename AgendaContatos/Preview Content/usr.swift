@@ -72,12 +72,19 @@ class LoadData:ObservableObject{
             } else {
                 if self.currentPage == 0 {
                     print("Erro ao decodificar JSON: Os dados não puderam ser decodificados.")
-
+                    
                 }
             }
             
             
         }.resume()
+    }
+    
+    func updateData() {
+        
+        currentPage = 0 // Reinicia a página para buscar a partir da primeira página
+        users.removeAll() // Remove os dados existentes
+        getData() // Chama a função para buscar os novos dados
     }
     
 }

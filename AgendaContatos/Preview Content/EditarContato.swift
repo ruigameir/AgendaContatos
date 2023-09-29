@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 struct EditarContato: View {
+    
     var user: User
+    
+    @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var userCompleto: GetAllInfo
     
@@ -27,6 +30,7 @@ struct EditarContato: View {
     @State private var country: String = ""
     @State private var timezone: String = ""
     
+        
     init(user: User) {
         self.user = user
         self.userCompleto = GetAllInfo(id: user.id)
@@ -34,19 +38,6 @@ struct EditarContato: View {
     
     var body: some View {
         VStack {
-//            HStack {
-//                Text("Informações Antigas")
-//                    .font(.headline)
-//                    .foregroundColor(.blue)
-//                    .padding(.horizontal)
-//
-//                Spacer()
-//
-//                Text("Novas Informações")
-//                    .font(.headline)
-//                    .foregroundColor(.green)
-//                    .padding(.horizontal)
-//            }
             
             Form {
                 Section(header: Text("Informações Pessoais")) {
@@ -72,7 +63,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
                     
                     HStack {
@@ -85,7 +76,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
                     
                     HStack {
@@ -98,7 +89,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
                     
                     HStack {
@@ -111,7 +102,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
                     
                     HStack {
@@ -124,7 +115,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
                     
                     HStack {
@@ -137,9 +128,9 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-
+                        
                     }
-                   
+                    
                 }
                 
                 Section(header: Text("Localização")) {
@@ -201,6 +192,30 @@ struct EditarContato: View {
                             .font(.headline)
                             .foregroundColor(.green)
                     }
+                    Button (action: {
+                        if (!title.isEmpty){userCompleto.userFullL?.title = title}
+                        if (!firstName.isEmpty){userCompleto.userFullL?.firstName = firstName}
+                        if (!lastName.isEmpty){userCompleto.userFullL?.lastName = lastName}
+                        if (!gender.isEmpty){userCompleto.userFullL?.gender = gender}
+                        if (!email.isEmpty){userCompleto.userFullL?.email = email}
+                        if (!dateOfBirth.isEmpty){userCompleto.userFullL?.dateOfBirth = dateOfBirth}
+                        if (!phone.isEmpty){userCompleto.userFullL?.phone = phone}
+                        if (!street.isEmpty){userCompleto.userFullL?.location.street = street}
+                        if (!city.isEmpty){userCompleto.userFullL?.location.city = city}
+                        if (!state.isEmpty){userCompleto.userFullL?.location.state = state}
+                        if (!country.isEmpty){userCompleto.userFullL?.location.country = country}
+                        if (!timezone.isEmpty){userCompleto.userFullL?.location.timezone = timezone }
+                        
+                        userCompleto.updateUser()
+                        self.presentationMode.wrappedValue.dismiss()
+
+                        
+                    }, label:{
+                        Text("Save")
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .frame(maxWidth: .infinity)
+                    
                     
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  Detalhes.swift
+//  ContatoIndividual.swift
 //  AgendaDeContatos
 //
 //  Created by Bruno Silva on 28/09/2023.
@@ -48,26 +48,26 @@ struct Detalhes: View {
 
 struct UserFull: Codable {
     
-    let id: String
-    let title: String
-    let firstName: String
-    let lastName: String
-    let gender: String
-    let email: String
-    let dateOfBirth: String
-    let registerDate: String
-    let phone: String
-    let picture: String
-    let location: Location
+    var id: String
+    var title: String
+    var firstName: String
+    var lastName: String
+    var gender: String
+    var email: String
+    var dateOfBirth: String
+    var registerDate: String
+    var phone: String
+    var picture: String
+    var location: Location
 }
 
 struct Location: Codable {
     
-    let street: String
-    let city: String
-    let state: String
-    let country: String
-    let timezone: String
+    var street: String
+    var city: String
+    var state: String
+    var country: String
+    var timezone: String
 }
 
 class GetAllInfo: ObservableObject {
@@ -79,7 +79,6 @@ class GetAllInfo: ObservableObject {
     init(id:String) {
         self.id = id
         self.getUserFull()
-        
     }
     
     func getUserFull() {
@@ -110,5 +109,53 @@ class GetAllInfo: ObservableObject {
                 print("Error decoding JSON: Data could not be decoded.")
             }
         }.resume()
+       
     }
+    func updateUser() {
+        guard let url = URL(string: "https://dummyapi.io/data/v1/user/" + self.id) else {
+            print("URL inválida")
+            return
+        }
+
+        var urlReq = URLRequest(url: url)
+        urlReq.httpMethod = "PUT"
+        urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlReq.setValue("650c6c418b4bf3bfbaef1ca9", forHTTPHeaderField: "app-id")
+
+        do {
+            let jsonData = try JSONEncoder().encode(userFullL)
+            urlReq.httpBody = jsonData
+
+            let task = URLSession.shared.dataTask(with: urlReq) { data, response, error in
+                if let error = error {
+                    print("Erro ao atualizar o usuário: \(error)")
+                    return
+                }
+
+                if let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) {
+                    do {
+                        if let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                            print("Contato atualizado:")
+                            print("ID:", jsonResponse["id"] ?? "")
+                            print("Nome:", jsonResponse["firstName"] ?? "", jsonResponse["lastName"] ?? "")
+                        }
+                    } catch {
+                        print("Erro ao analisar a resposta: \(error)")
+                    }
+                } else {
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Erro ao atualizar o contato: \(httpResponse.statusCode)")
+                    }
+                    if let responseData = data, let responseString = String(data: responseData, encoding: .utf8) {
+                        print("Detalhes do erro: \(responseString)")
+                    }
+                }
+            }
+
+            task.resume()
+        } catch {
+            print("Erro ao serializar os dados JSON: \(error)")
+        }
+    }
+
 }
