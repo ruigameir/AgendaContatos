@@ -30,6 +30,7 @@ struct EditarContato: View {
     @State private var country: String = ""
     @State private var timezone: String = ""
     
+
         
     init(user: User) {
         self.user = user
@@ -218,7 +219,8 @@ struct EditarContato: View {
                     
                     
                 }
-            }
+             }
         }
+        
     }
 }

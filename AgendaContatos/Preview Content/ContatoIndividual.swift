@@ -13,17 +13,14 @@ struct ContatoIndividual: View {
     
     var user: User
     
-    //var userFull: UserFull
-    
-    //@ObservedObject var perfil = GetAllInfo()
-    
     var apagar: ApagarContato {
         return ApagarContato(id: user.id) // Passar o ID para ApagarContato
     }
     
     var body: some View {
         
-        VStack{
+        VStack(spacing: 20) {
+            
             
             AsyncImage(url: URL(string: user.picture)) { phase in
                 switch phase {
@@ -46,41 +43,54 @@ struct ContatoIndividual: View {
             }
             
             Text(user.firstName + " " + user.lastName)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .font(.title)
                 .fontWeight(.bold)
-                .padding(.top,20)
-            //            Text(userFull.phone)
-            //                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            //                .fontWeight(.bold)
-            //                .padding(.top,20)
-            //            Text(userFull.email)
-            //                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            //                .fontWeight(.bold)
-            //                .padding(.top,20)
             
-            
-            Spacer()
-            NavigationLink (destination: Detalhes(user: user)){
+            NavigationLink(destination: Detalhes(user: user)){
                 Text("Detalhes")
+                    .foregroundColor(.blue)
+                    .frame(width: 120, height: 40)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.blue, lineWidth: 1)
+                    )
             }
+            
             NavigationLink(destination: EditarContato(user: user)) {
                 Text("Editar")
+                    .foregroundColor(.green)
+                    .frame(width: 120, height: 40)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.green, lineWidth: 1)
+                    )
             }
-            
             
             Button(action: {
                 print("ID do usuário a ser excluído: \(user.id)")
                 apagar.deleteUser()
-            }, label: {Text("Apagar")})
+            }) {
+                Text("Apagar")
+                    .foregroundColor(.red)
+                    .frame(width: 120, height: 40)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.red, lineWidth: 1)
+                    )
+            }
             
-            
+            Spacer() // Empurra os elementos para o centro da tela
             
         }
         .navigationTitle("\(user.firstName) \(user.lastName)")
-        
-        
-        
-        
     }
 }
+
+
 

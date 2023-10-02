@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject var load = LoadData()
     
     @State private var isRefreshing = true
-        
+    
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     
     var body: some View {
@@ -58,44 +58,45 @@ struct ContentView: View {
                     }
                 }
                 .refreshable {
-                    isRefreshing = false
                     load.updateData()
                 }
                 .onAppear {
-                    Task {
-                        if(!isRefreshing){
+                    if(!isRefreshing){
+                        Task {
+                            
                             load.updateData()
-                            isRefreshing = false
+                            
+                        }
+                    }
+                    isRefreshing = false
 
-                        }
-                        
-                    }
                 }
-                
-                .navigationBarTitle("", displayMode: .inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        HStack {
-                            Text("Contatos")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                        }
-                        .padding(.top, 30)
-                        .padding(.bottom, 25)
+            }
+            
+            .navigationBarTitle("", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        Text("Contatos")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            NavigationLink(destination: CriadorContato()) {
-                                Text("Add")
-                                Image(systemName: "plus.circle.fill")
-                                    .imageScale(.large)
-                            }
+                    .padding(.top, 30)
+                    .padding(.bottom, 25)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        NavigationLink(destination: CriadorContato()) {
+                            Text("Add")
+                            Image(systemName: "plus.circle.fill")
+                                .imageScale(.large)
                         }
-                        .padding(.top, 30)
-                        .padding(.bottom, 25)
                     }
+                    .padding(.top, 30)
+                    .padding(.bottom, 25)
                 }
             }
         }
     }
 }
+
