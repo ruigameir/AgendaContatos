@@ -15,6 +15,7 @@ struct ContentView: View {
     
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     
+   
     var body: some View {
         NavigationView {
             VStack {
@@ -63,9 +64,9 @@ struct ContentView: View {
                 .onAppear {
                     if(!isRefreshing){
                         Task {
-                            
+
                             load.updateData()
-                            
+
                         }
                     }
                     isRefreshing = false
@@ -97,6 +98,7 @@ struct ContentView: View {
                 }
             }
         }
+        
     }
 }
 

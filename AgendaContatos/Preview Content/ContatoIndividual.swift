@@ -13,6 +13,12 @@ struct ContatoIndividual: View {
     
     var user: User
     
+    @State private var showingAlert = false
+    
+    @State private var isEditadoAlert = false
+
+    @Environment(\.presentationMode) var presentationMode
+    
     var apagar: ApagarContato {
         return ApagarContato(id: user.id) // Passar o ID para ApagarContato
     }
@@ -59,6 +65,7 @@ struct ContatoIndividual: View {
             }
             
             NavigationLink(destination: EditarContato(user: user)) {
+                
                 Text("Editar")
                     .foregroundColor(.green)
                     .frame(width: 120, height: 40)
@@ -71,8 +78,8 @@ struct ContatoIndividual: View {
             }
             
             Button(action: {
-                print("ID do usuário a ser excluído: \(user.id)")
-                apagar.deleteUser()
+                showingAlert = true
+                
             }) {
                 Text("Apagar")
                     .foregroundColor(.red)
@@ -89,6 +96,20 @@ struct ContatoIndividual: View {
             
         }
         .navigationTitle("\(user.firstName) \(user.lastName)")
+        .alert(isPresented: $showingAlert) {
+                    Alert(
+                        title: Text("Confirmar exclusão"),
+                        message: Text("Você tem certeza de que deseja excluir este contato? Esta ação não pode ser desfeita."),
+                        primaryButton: .default(Text("Cancelar")),
+                        secondaryButton: .destructive(Text("Excluir"), action: {
+                            // Aqui, você pode chamar a função para excluir o usuário
+                            print("ID do usuário a ser excluído: (user.id)")
+                            apagar.deleteUser()
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
+                    )
+                }
+        
     }
 }
 

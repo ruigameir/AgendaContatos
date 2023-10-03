@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CriadorContato: View{
+struct CriadorContato: View {
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -26,12 +26,19 @@ struct CriadorContato: View{
     @State private var country: String = ""
     @State private var timezone: String = ""
     
+    @State private var errorMessage: String = ""
+    
+    @State private var showAlert = false // Estado para controlar a exibição do alerta
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
+    
     @StateObject var criar = CriarUser()
     
-    var body: some View{
+    var body: some View {
         
-        VStack{
-            Form{
+        VStack {
+            Form {
                 Section(header: Text("Informações Pessoais")) {
                     TextField("Título", text: $title)
                     TextField("Primeiro Nome", text: $firstName)
@@ -39,7 +46,7 @@ struct CriadorContato: View{
                     TextField("Genero", text: $gender)
                     TextField("URL da Foto", text: $picture)
                     TextField("Email", text: $email)
-                    TextField("Data de Nascimento", text: $dateOfBirth)
+                    TextField("Data de Nascimento (MM/DD/AAAA)", text: $dateOfBirth)
                     TextField("Telefone", text: $phone)
                 }
                 
@@ -50,8 +57,7 @@ struct CriadorContato: View{
                     TextField("País", text: $country)
                     TextField("Fuso Horário", text: $timezone)
                     
-                    Button (action: {
-                        
+                    Button(action: {
                         criar.data["title"] = title
                         criar.data["firstName"] = firstName
                         criar.data["lastName"] = lastName
@@ -68,39 +74,59 @@ struct CriadorContato: View{
                             "timezone": timezone
                         ]
                         
-                        criar.create_user()
-                        
-                        // Após criar o usuário com sucesso, volte para a ContentView
-                        self.presentationMode.wrappedValue.dismiss()
+                        criar.create_user { result in
+                            switch result {
+                            case .success:
+                                // Usuário criado com sucesso, limpe a mensagem de erro
+                                alertTitle = "Sucesso"
+                                alertMessage = "Contato criado com sucesso."
+
+                            case .failure(let error):
+                                // Atualize a mensagem de erro com base no erro
+                                alertTitle = "Erro"
+                                alertMessage = "Erro ao criar o usuário: \(error.localizedDescription)"
+                                
+                            }
+                            showAlert = true
+                        }
                         
                     }, label: {
                         Text("Criar")
                     })
                     .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)
+                    
+                    
                 }
- 
+                // Use o modificador 'alert' para exibir o alerta quando 'showAlert' for verdadeiro
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK"), action: {
+                        self.presentationMode.wrappedValue.dismiss()
+
+                    }))
+                }
+                
+                
             }
-  
         }
-        
         .navigationTitle("Crie um contato")
-        
     }
 }
-
 
 class CriarUser: ObservableObject {
     
     let url: URL
     let apiKey: String
     
+    @Published var errorMessage: String = ""
+    
+    
     @Published var data: [String: Any] = [
         "title": "",
         "firstName": "",
         "lastName": "",
         "picture": "",
-        "gender":"",
+        "gender": "",
         "email": "",
         "dateOfBirth": "",
         "phone": "",
@@ -120,7 +146,7 @@ class CriarUser: ObservableObject {
         self.apiKey = "650c6c418b4bf3bfbaef1ca9"
     }
     
-    func create_user() {
+    func create_user(completion: @escaping (Result<Void, Error>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(apiKey, forHTTPHeaderField: "app-id")
@@ -133,6 +159,7 @@ class CriarUser: ObservableObject {
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print("Erro ao criar o usuário: \(error)")
+                    completion(.failure(error))
                     return
                 }
                 
@@ -144,15 +171,19 @@ class CriarUser: ObservableObject {
                             print("ID:", jsonResponse["id"] ?? "")
                             print("Nome:", jsonResponse["firstName"] ?? "", jsonResponse["lastName"] ?? "")
                         }
+                        completion(.success(()))
                     } catch {
                         print("Erro ao analisar a resposta: \(error)")
+                        completion(.failure(error))
                     }
                 } else {
                     if let httpResponse = response as? HTTPURLResponse {
                         print("Erro ao criar o usuário: \(httpResponse.statusCode)")
+                        completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: nil)))
                     }
                     if let responseData = data, let responseString = String(data: responseData, encoding: .utf8) {
                         print("Detalhes do erro: \(responseString)")
+                        completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: responseString])))
                     }
                 }
             }
@@ -160,6 +191,7 @@ class CriarUser: ObservableObject {
             task.resume()
         } catch {
             print("Erro ao serializar os dados JSON: \(error)")
+            completion(.failure(error))
         }
     }
 }

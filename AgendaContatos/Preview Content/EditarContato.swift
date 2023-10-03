@@ -30,8 +30,8 @@ struct EditarContato: View {
     @State private var country: String = ""
     @State private var timezone: String = ""
     
-
-        
+    @State private var isEditado = false
+    
     init(user: User) {
         self.user = user
         self.userCompleto = GetAllInfo(id: user.id)
@@ -193,6 +193,10 @@ struct EditarContato: View {
                             .font(.headline)
                             .foregroundColor(.green)
                     }
+                    
+                    
+                    
+                    
                     Button (action: {
                         if (!title.isEmpty){userCompleto.userFullL?.title = title}
                         if (!firstName.isEmpty){userCompleto.userFullL?.firstName = firstName}
@@ -208,8 +212,8 @@ struct EditarContato: View {
                         if (!timezone.isEmpty){userCompleto.userFullL?.location.timezone = timezone }
                         
                         userCompleto.updateUser()
-                        self.presentationMode.wrappedValue.dismiss()
-
+                        isEditado = true
+                        
                         
                     }, label:{
                         Text("Save")
@@ -219,8 +223,14 @@ struct EditarContato: View {
                     
                     
                 }
-             }
+            }
         }
-        
+        .alert(isPresented: $isEditado) {
+            Alert(title: Text("Sucesso"), message: Text("Contato Editado com sucesso. Regresse à página principal para ver o contato atualizado"), dismissButton: .default(Text("OK"), action: {
+                // Aqui, você pode chamar a função para excluir o usuário
+                print("ID do usuário a ser editado: (user.id)")
+                self.presentationMode.wrappedValue.dismiss()
+            }))
+        }
     }
 }
