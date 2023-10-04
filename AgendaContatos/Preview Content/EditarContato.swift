@@ -12,10 +12,11 @@ struct EditarContato: View {
     
     var user: User
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode // Referência ao modo de apresentação
     
-    @ObservedObject var userCompleto: GetAllInfo
+    @ObservedObject var userCompleto: GetAllInfo // Objeto observável para obter informações completas do usuário
     
+    // Declarações de propriedades para armazenar valores editados
     @State private var title: String = ""
     @State private var firstName: String = ""
     @State private var lastName: String = ""
@@ -30,11 +31,11 @@ struct EditarContato: View {
     @State private var country: String = ""
     @State private var timezone: String = ""
     
-    @State private var isEditado = false
+    @State private var isEditado = false // Estado para controlar se as edições foram feitas
     
     init(user: User) {
-        self.user = user
-        self.userCompleto = GetAllInfo(id: user.id)
+        self.user = user // Inicializa o usuário que está sendo editado
+        self.userCompleto = GetAllInfo(id: user.id) // Inicializa o objeto para obter informações completas do usuário
     }
     
     var body: some View {
@@ -116,9 +117,7 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-                        
                     }
-                    
                     HStack {
                         Text("\(userCompleto.userFullL?.phone ?? "Not found") ")
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -129,11 +128,8 @@ struct EditarContato: View {
                             .frame(maxWidth: .infinity)
                             .font(.headline)
                             .foregroundColor(.green)
-                        
                     }
-                    
                 }
-                
                 Section(header: Text("Localização")) {
                     HStack {
                         Text("\(userCompleto.userFullL?.location.street ?? "Not found")")
@@ -145,7 +141,6 @@ struct EditarContato: View {
                             .font(.headline)
                             .foregroundColor(.green)
                     }
-                    
                     HStack {
                         Text("\(userCompleto.userFullL?.location.city ?? "Not found")")
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -194,10 +189,8 @@ struct EditarContato: View {
                             .foregroundColor(.green)
                     }
                     
-                    
-                    
-                    
                     Button (action: {
+                        // Atualiza as informações do usuário com base nos campos editados
                         if (!title.isEmpty){userCompleto.userFullL?.title = title}
                         if (!firstName.isEmpty){userCompleto.userFullL?.firstName = firstName}
                         if (!lastName.isEmpty){userCompleto.userFullL?.lastName = lastName}
@@ -211,25 +204,21 @@ struct EditarContato: View {
                         if (!country.isEmpty){userCompleto.userFullL?.location.country = country}
                         if (!timezone.isEmpty){userCompleto.userFullL?.location.timezone = timezone }
                         
-                        userCompleto.updateUser()
+                        userCompleto.updateUser() // Chama a função para atualizar o usuário
                         isEditado = true
                         
-                        
                     }, label:{
-                        Text("Save")
+                        Text("Save") // Botão para salvar as alterações
                     })
                     .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)
-                    
-                    
                 }
             }
         }
         .alert(isPresented: $isEditado) {
             Alert(title: Text("Sucesso"), message: Text("Contato Editado com sucesso. Regresse à página principal para ver o contato atualizado"), dismissButton: .default(Text("OK"), action: {
-                // Aqui, você pode chamar a função para excluir o usuário
                 print("ID do usuário a ser editado: (user.id)")
-                self.presentationMode.wrappedValue.dismiss()
+                self.presentationMode.wrappedValue.dismiss() // Fecha a tela de edição
             }))
         }
     }

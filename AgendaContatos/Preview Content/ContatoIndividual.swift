@@ -8,26 +8,23 @@
 import Foundation
 import SwiftUI
 
-
 struct ContatoIndividual: View {
     
     var user: User
     
-    @State private var showingAlert = false
+    @State private var showingAlert = false // Um estado para controlar a exibição do alerta
     
-    @State private var isEditadoAlert = false
-
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode // Acede o modo de apresentação
     
+    // Cria uma instância de ApagarContato com o ID do usuário
     var apagar: ApagarContato {
-        return ApagarContato(id: user.id) // Passar o ID para ApagarContato
+        return ApagarContato(id: user.id)
     }
     
     var body: some View {
         
         VStack(spacing: 20) {
-            
-            
+            // Exibe a imagem do usuário de forma assíncrona
             AsyncImage(url: URL(string: user.picture)) { phase in
                 switch phase {
                 case .success(let image):
@@ -52,6 +49,7 @@ struct ContatoIndividual: View {
                 .font(.title)
                 .fontWeight(.bold)
             
+            // Navega para a tela de detalhes do usuário
             NavigationLink(destination: Detalhes(user: user)){
                 Text("Detalhes")
                     .foregroundColor(.blue)
@@ -64,8 +62,8 @@ struct ContatoIndividual: View {
                     )
             }
             
+            // Navega para a tela de edição do usuário
             NavigationLink(destination: EditarContato(user: user)) {
-                
                 Text("Editar")
                     .foregroundColor(.green)
                     .frame(width: 120, height: 40)
@@ -77,6 +75,7 @@ struct ContatoIndividual: View {
                     )
             }
             
+            // Botão para apagar o usuário
             Button(action: {
                 showingAlert = true
                 
@@ -95,23 +94,22 @@ struct ContatoIndividual: View {
             Spacer() // Empurra os elementos para o centro da tela
             
         }
+        // Define o título da barra de navegação
         .navigationTitle("\(user.firstName) \(user.lastName)")
+        
+        // Alerta de confirmação para apagar o usuário
         .alert(isPresented: $showingAlert) {
-                    Alert(
-                        title: Text("Confirmar exclusão"),
-                        message: Text("Você tem certeza de que deseja excluir este contato? Esta ação não pode ser desfeita."),
-                        primaryButton: .default(Text("Cancelar")),
-                        secondaryButton: .destructive(Text("Excluir"), action: {
-                            // Aqui, você pode chamar a função para excluir o usuário
-                            print("ID do usuário a ser excluído: (user.id)")
-                            apagar.deleteUser()
-                            self.presentationMode.wrappedValue.dismiss()
-                        })
-                    )
-                }
+            Alert(
+                title: Text("Confirmar exclusão"),
+                message: Text("Você tem certeza de que deseja excluir este contato? Esta ação não pode ser desfeita."),
+                primaryButton: .default(Text("Cancelar")),
+                secondaryButton: .destructive(Text("Excluir"), action: {
+                    print("ID do usuário a ser excluído: (user.id)")
+                    apagar.deleteUser()
+                    self.presentationMode.wrappedValue.dismiss() // fecha a tela após a exclusao
+                })
+            )
+        }
         
     }
 }
-
-
-
