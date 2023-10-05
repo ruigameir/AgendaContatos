@@ -104,7 +104,7 @@ struct ContatoIndividual: View {
                 message: Text("Você tem certeza de que deseja excluir este contato? Esta ação não pode ser desfeita."),
                 primaryButton: .default(Text("Cancelar")),
                 secondaryButton: .destructive(Text("Excluir"), action: {
-                    print("ID do usuário a ser excluído: (user.id)")
+                    print("ID do usuário a ser excluído: \(user.id)")
                     apagar.deleteUser()
                     self.presentationMode.wrappedValue.dismiss() // fecha a tela após a exclusao
                 })

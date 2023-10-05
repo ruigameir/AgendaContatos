@@ -22,7 +22,6 @@ struct EditarContato: View {
     @State private var lastName: String = ""
     @State private var picture: String = ""
     @State private var gender: String = ""
-    @State private var email: String = ""
     @State private var dateOfBirth: String = ""
     @State private var phone: String = ""
     @State private var street: String = ""
@@ -94,18 +93,6 @@ struct EditarContato: View {
                         
                     }
                     
-                    HStack {
-                        Text("\(userCompleto.userFullL?.email ?? "Not found") ")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                        
-                        TextField("Email", text: $email)
-                            .frame(maxWidth: .infinity)
-                            .font(.headline)
-                            .foregroundColor(.green)
-                        
-                    }
                     
                     HStack {
                         Text("\(userCompleto.userFullL?.dateOfBirth ?? "Not found") ")
@@ -195,7 +182,6 @@ struct EditarContato: View {
                         if (!firstName.isEmpty){userCompleto.userFullL?.firstName = firstName}
                         if (!lastName.isEmpty){userCompleto.userFullL?.lastName = lastName}
                         if (!gender.isEmpty){userCompleto.userFullL?.gender = gender}
-                        if (!email.isEmpty){userCompleto.userFullL?.email = email}
                         if (!dateOfBirth.isEmpty){userCompleto.userFullL?.dateOfBirth = dateOfBirth}
                         if (!phone.isEmpty){userCompleto.userFullL?.phone = phone}
                         if (!street.isEmpty){userCompleto.userFullL?.location.street = street}
@@ -217,7 +203,7 @@ struct EditarContato: View {
         }
         .alert(isPresented: $isEditado) {
             Alert(title: Text("Sucesso"), message: Text("Contato Editado com sucesso. Regresse à página principal para ver o contato atualizado"), dismissButton: .default(Text("OK"), action: {
-                print("ID do usuário a ser editado: (user.id)")
+                print("ID do usuário a ser editado: \(user.id)")
                 self.presentationMode.wrappedValue.dismiss() // Fecha a tela de edição
             }))
         }
